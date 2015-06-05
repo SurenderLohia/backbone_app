@@ -1,21 +1,21 @@
 // Book module
 var app = app || {};
 
-var book1 = new app.Book({
-	id: 1,
-	title: 'Book 1'
+var books = new app.Books();
+
+// Fetch data
+books.fetch({
+	success: function(data) {
+		var bookList = new app.BookListView({
+			el: '#book-list',
+			model: data,
+		});
+
+		bookList.render();
+	},
+	error: function(err) {
+		console.log('Error: ' + err);
+	}
 });
 
-var book2 = new app.Book({
-	id: 2,
-	title: 'Book 2'
-});
 
-var books = new app.Books([book1, book2]);
-
-var bookList = new app.BookListView({
-	el: '#todo-list',
-	model: books,
-});
-
-bookList.render();
