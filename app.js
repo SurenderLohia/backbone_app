@@ -62,4 +62,34 @@ $(document).ready(function() {
 })
 
 
+define(function (require) {
+  var _ = require('underscore'),
+      Backbone = require('backbone'),
+      $ = require('jquery'),
+      AppTileView = require('views/apps/app-tile-view');
+      
+  var IntegrationView = Backbone.View.extend({
+    render: function() {
+      console.log('app-tiles-view instansiated');
+      var appTileView,
+          i,
+          modelLen = this.model.length;
+
+      for(i = 0; i < modelLen; i += 1) {
+        appTileView = new AppTileView({model: this.model.at(i)});
+
+
+        this.$el.append(appTileView.el);
+        appTileView.render();
+      }
+
+      return this;
+    },
+  });
+
+  return IntegrationView;
+});
+
+
+
 
